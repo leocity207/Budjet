@@ -1,0 +1,80 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Script/entry.gd" type="Script" id=1]
+[ext_resource path="res://Img/cross.png" type="Texture" id=2]
+[ext_resource path="res://ressource/Main.tres" type="Theme" id=3]
+
+[sub_resource type="Theme" id=1]
+
+[node name="Entry" type="HBoxContainer" groups=[
+"ENTRY",
+]]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_bottom = 37.0
+theme = ExtResource( 3 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Rank_Value" type="SpinBox" parent="."]
+margin_right = 48.0
+margin_bottom = 37.0
+rect_min_size = Vector2( 0, 15 )
+size_flags_horizontal = 4
+allow_greater = true
+
+[node name="Name" type="TextEdit" parent="."]
+margin_left = 52.0
+margin_right = 746.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.95
+text = "Name of the new object"
+
+[node name="Estimated_Price" type="SpinBox" parent="."]
+margin_left = 750.0
+margin_right = 825.0
+margin_bottom = 37.0
+rect_min_size = Vector2( 75, 0 )
+size_flags_horizontal = 4
+step = 0.01
+allow_greater = true
+
+[node name="Current_Invested_Money" type="SpinBox" parent="."]
+margin_left = 829.0
+margin_right = 904.0
+margin_bottom = 37.0
+rect_min_size = Vector2( 75, 0 )
+size_flags_horizontal = 4
+step = 0.01
+allow_greater = true
+
+[node name="Monthly_Addition" type="SpinBox" parent="."]
+margin_left = 908.0
+margin_right = 983.0
+margin_bottom = 37.0
+rect_min_size = Vector2( 75, 0 )
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme = SubResource( 1 )
+max_value = 1e+09
+step = 0.01
+allow_greater = true
+editable = false
+
+[node name="Errase_Entry_Button" type="Button" parent="."]
+margin_left = 987.0
+margin_right = 1024.0
+margin_bottom = 37.3215
+rect_min_size = Vector2( 37, 0 )
+icon = ExtResource( 2 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="value_changed" from="Rank_Value" to="." method="_on_Rank_Value_value_changed"]
+[connection signal="value_changed" from="Estimated_Price" to="." method="_on_Estimated_Price_value_changed"]
+[connection signal="pressed" from="Errase_Entry_Button" to="." method="_on_Errase_Entry_Button_pressed"]

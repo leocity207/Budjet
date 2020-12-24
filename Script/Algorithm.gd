@@ -1,5 +1,8 @@
 extends Node
 
+
+
+
 #-------------------------------------------------------------------------------------------------------
 #this function is used as a base for cumputing the number of month needed to pay of entries
 #Arguments:
@@ -25,6 +28,9 @@ func Get_time_to_pay_off(list_entry):
 				time_month_list[i]+=1
 	return time_month_list
 
+
+
+
 #-------------------------------------------------------------------------------------------------------
 #this function is used for preparing data before they get computed for the next month budget 
 #this function is esentialy used to update the list of entry
@@ -43,6 +49,9 @@ func Get_next_month_budget(list_entry):
 		Current_invested_money_list.append(list_entry[i].get_node("Current_Invested_Money").value)
 		is_paid_off_list.append(1)
 	return Compute_next_month_budget(list_entry,is_paid_off_list,Current_invested_money_list)
+
+
+
 
 #-------------------------------------------------------------------------------------------------------
 #this function is used as a base for cumputing the next month budget
@@ -77,6 +86,9 @@ func Compute_next_month_budget(list_entry,is_paid_off_list,Current_invested_mone
 			
 	return next_month_budget_list
 
+
+
+
 #-------------------------------------------------------------------------------------------------------
 #correct the overflow comming in the next_month_money_list list
 #Arguments:
@@ -101,6 +113,9 @@ func Correct_overflow(list_entry,Current_invested_money_list,next_month_money_li
 			reste+=local_reste
 			is_there_rest=true
 	return [reste,is_there_rest]
+
+
+
 
 #-------------------------------------------------------------------------------------------------------
 #compute the fraction of which the entry will recieve from the budget this month
@@ -140,6 +155,9 @@ func compute_part(list_entry,is_paid_off_list):
 			Next_month_part.append(is_paid_off_list[i]*log((Global.NUMBER_OF_ENTRY-list_entry[i].position+1)*Global.PARAMETER) / total)
 	return Next_month_part
 
+
+
+
 #-------------------------------------------------------------------------------------------------------
 #function that return true if the is_paid_of_list is full of 0(all entry have been paid off)
 #--------------------------------------------------------------------------------------------------------	
@@ -149,8 +167,16 @@ func All_paid_off(is_paid_off_list):
 			return false
 	return true
 
+
+
+
 #-------------------------------------------------------------------------------------------------------
 #function used to give the small leftover when rounding to the highest in the classement
+#Arguments:
+#		-leftover: the leftover value that need to be allocated
+#		-list_entry: the list of entry object (used to retrieve the clasment position)
+#		-is_paid_off_list: list of 0 (paid off)and 1 (paid off) for the entry ellement
+#		-next_month_budget_list: the next month budget list corresponding to each entry
 #--------------------------------------------------------------------------------------------------------	
 func Give_leftover(leftover,list_entry,is_paid_off_list,next_month_budget_list):
 	var leftover_not_given=true
@@ -166,7 +192,12 @@ func Give_leftover(leftover,list_entry,is_paid_off_list,next_month_budget_list):
 					leftover_not_given=false
 					break
 
-static func First_Index_Comparator(a,b):
+
+
+#-------------------------------------------------------------------------------------------------------
+#function used to comapare first index of an array (the purpose of this function is for sorting)
+#------------------------------------------------------------------------------------------------------
+func First_Index_Comparator(a,b):
 	if a[0]<b[0]:
 		return true
 	return false

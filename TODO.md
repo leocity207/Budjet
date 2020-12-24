@@ -137,6 +137,7 @@
     DONE
     ----
         ※ Added some add_entry/add_bar function to make it easier when adding entry to the whole scene
+        ※there is a problem when updating after changing element place in the clacement (it was due to entry not having their position update correctly)
 
 
     TODO
@@ -144,9 +145,10 @@
         ※ Finish theme
         ※ add warning message when doing new page or deleting entry
         ※ add a background scale for the bar graph
-        ※ implement sorting for bar graph as it is not implemented yet
 
-        ※there is a problem when updating after changing element place in the clacement
+
+
+
 
 
 

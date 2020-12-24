@@ -57,8 +57,13 @@ __meta__ = {
 }
 
 [node name="Name_label" type="Label" parent="Bar_container/Bar"]
-margin_right = 40.0
-margin_bottom = 14.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.9386
+margin_top = -34.3048
+margin_right = -10.0614
+margin_bottom = -52.3048
+text = "LOL"
 __meta__ = {
 "_edit_use_anchors_": false
 }

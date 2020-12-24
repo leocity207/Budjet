@@ -7,24 +7,11 @@ var position=0
 var is_reimbursed=1
 var is_lock=false
 
-#-------------------------------------------------------
-# For initing a new entry node we need to give it a rank
-#-------------------------------------------------------
-func Init_node(rank):
-	get_node("Rank_Value").value=rank
-	position=rank
 
+#----------------------------------------------------------------
+#CALLBACK FUNCTIONS
+#----------------------------------------------------------------
 
-
-
-#-------------------------------------------------------
-#Used when we need to update the rank
-#-------------------------------------------------------
-func update_position(rank):
-	lock()
-	get_node("Rank_Value").set_value(rank)
-	unlock()
-	position=rank
 
 
 
@@ -39,7 +26,20 @@ func _on_Rank_Value_value_changed(_value):
 
 
 
+#-------------------------------------------------------
+#Handling an entry being erased
+#-------------------------------------------------------
+func _on_Errase_Entry_Button_pressed():
+	emit_signal("deleted_entry",position-1)
 
+
+func _on_Estimated_Price_value_changed(value):
+	emit_signal("price_changed")
+
+
+#----------------------------------------------------------------
+#ATTRIBUTE MODIFICATION
+#----------------------------------------------------------------
 
 #-------------------------------------------------------
 #Function used for saving an loading entry
@@ -63,10 +63,20 @@ func load_from_dic(dic):
 	
 
 #-------------------------------------------------------
-#Handling an entry being erased
+# For initing a new entry node we need to give it a rank
 #-------------------------------------------------------
-func _on_Errase_Entry_Button_pressed():
-	emit_signal("deleted_entry",position-1)
+func Init_node(rank):
+	get_node("Rank_Value").value=rank
+	position=rank
+
+#-------------------------------------------------------
+#Used when we need to update the rank
+#-------------------------------------------------------
+func update_position(rank):
+	lock()
+	get_node("Rank_Value").set_value(rank)
+	unlock()
+	position=rank
 
 #-------------------------------------------------------
 #for locking/unlocking the entry from emitting a need for sort
@@ -77,5 +87,4 @@ func unlock():
 	is_lock=false
 
 
-func _on_Estimated_Price_value_changed(value):
-	emit_signal("price_changed")
+

@@ -252,9 +252,7 @@ func _on_Max_box_value_changed(value):
 # delet all entry on screen for a new page
 #-------------------------------------------------
 func New_page():
-	for i in range(Global.NUMBER_OF_ENTRY):
-		get_node(LIST_ENTRY_NODE).remove_child(list_entry[i])
-		list_entry[i].queue_free()
+	Delete_all()
 	list_entry=[]
 	Global.NUMBER_OF_ENTRY=0
 

@@ -1,0 +1,8 @@
+[gd_resource type="DynamicFont" load_steps=2 format=2]
+
+[ext_resource path="res://Font/BagnardSans.otf" type="DynamicFontData" id=1]
+
+[resource]
+size = 17
+outline_color = Color( 0.439216, 0.439216, 0.439216, 1 )
+font_data = ExtResource( 1 )

@@ -49,7 +49,8 @@ func _on_New_entry_pressed():
 	#handling what concern the
 	Global.NUMBER_OF_ENTRY+=1
 	Add_entry(preload("../scene/Entry.tscn").instance())
-	Add_bar(preload("../scene/Bar.tscn").instance(),"")
+	Add_bar(preload("../scene/Bar.tscn").instance(),"new entry "+str(Global.NUMBER_OF_ENTRY))
+	Update_bar_wide()
 
 
 #-------------------------------------------------
@@ -142,7 +143,7 @@ func _on_load_dialog_file_selected(path):
 				#get_node(LIST_BAR_NODE).move_child(list_bar[j],i)
 				
 	Update_entry_list()
-
+	Update_bar_wide()
 
 #---------------------------------------------------------------
 # Function for handling the need for sorting when change is detected
@@ -151,7 +152,6 @@ func _on_Next_month_budget_value_changed(value):
 	Global.MONTHLY_INCOME=value
 	if list_entry!=[] and Global.MONTHLY_INCOME!=0:
 		Update_all()
-
 
 #---------------------------------------
 #used when the slider is updated
@@ -184,14 +184,20 @@ func _on_function_changed(id):
 		get_node("Main_container/Middle_Bar/Min_box").min_value=1.01
 		Global.USED_FUNCTION=Global.LOGARITHMIC
 
-
 #-------------------------------------------
 # update the next month value request
 #-------------------------------------------
 func _on_apply_month_button_pressed():
 	Update_for_next_month()
 
-
+#-------------------------------------------
+# used when the name of an entry is changed
+#-------------------------------------------
+func _on_entry_name_changed(entry):
+	for i in range(Global.NUMBER_OF_ENTRY):
+		if list_entry[i]==entry:
+			list_bar[i].update_name(list_entry[i].get_node("Name").get_text())
+		
 #-------------------------------------------------------------------------------------------
 # Callback when the classement value of an entry have been changed and we need to sort them
 #-------------------------------------------------------------------------------------------
@@ -222,6 +228,7 @@ func _on_deleted_entry(position_node):
 	Update_all()
 	for element in list_entry:# lock the element because value is changed and we don't want to emit signal
 		element.unlock()
+	Update_bar_wide()
 
 
 #-------------------------------------------------------------------------
@@ -251,6 +258,7 @@ func _on_Max_box_value_changed(value):
 #-------------------------------------------------
 # delet all entry on screen for a new page
 #-------------------------------------------------
+
 func New_page():
 	Delete_all()
 	list_entry=[]
@@ -267,6 +275,7 @@ func Add_entry(new_entry,node_data:Dictionary={},has_second_paramter:bool =false
 	new_entry.connect("need_sort",self,"_on_sorting_needed")
 	new_entry.connect("deleted_entry",self,"_on_deleted_entry")
 	new_entry.connect("price_changed",self,"Update_all")
+	new_entry.connect("name_changed",self,"_on_entry_name_changed")
 	list_entry.append(new_entry)
 	get_node(LIST_ENTRY_NODE).add_child(new_entry)
 
@@ -359,5 +368,10 @@ func Sort_bar_From_Time():
 		list_bar[bar_list_value[i][1]].get_parent().move_child(list_bar[bar_list_value[i][1]],i)
 
 
-
+func Update_bar_wide():
+	var container_wide = get_node("Main_container/View_main/Bar_graph/Scroller_BG").get_size()
+	for i in range(Global.NUMBER_OF_ENTRY):
+		var min_bar_size=Vector2(((container_wide.x)/Global.NUMBER_OF_ENTRY)-5,0)
+		list_bar[i].set_custom_minimum_size(min_bar_size)
+	
 

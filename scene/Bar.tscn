@@ -58,14 +58,24 @@ __meta__ = {
 }
 
 [node name="Name_label" type="Label" parent="Bar_container/Bar"]
-margin_right = 129.0
-margin_bottom = 22.0
+margin_left = 79.0
+margin_top = -6.0
+margin_right = 114.0
+margin_bottom = 16.0
 rect_rotation = 90.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 custom_fonts/font = ExtResource( 3 )
-text = "thid is the name"
+text = "ldkd"
 max_lines_visible = 21
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="Bar_container/Bar/Name_label"]
+modulate = Color( 1, 1, 1, 0.615686 )
+anchor_right = 1.0
+anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -2,6 +2,7 @@ extends HBoxContainer
 signal need_sort(changed_position_entry)
 signal deleted_entry(position)
 signal price_changed()
+signal name_changed(entry)
 
 var position=0
 var is_reimbursed=1
@@ -88,3 +89,7 @@ func unlock():
 
 
 
+
+
+func _on_Name_text_changed():
+	emit_signal("name_changed",self)

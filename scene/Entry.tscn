@@ -76,5 +76,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="value_changed" from="Rank_Value" to="." method="_on_Rank_Value_value_changed"]
+[connection signal="text_changed" from="Name" to="." method="_on_Name_text_changed"]
 [connection signal="value_changed" from="Estimated_Price" to="." method="_on_Estimated_Price_value_changed"]
 [connection signal="pressed" from="Errase_Entry_Button" to="." method="_on_Errase_Entry_Button_pressed"]

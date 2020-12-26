@@ -207,6 +207,7 @@ margin_right = 909.0
 margin_bottom = 315.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/separation = 0
 
 [node name="save_dialog" type="FileDialog" parent="."]
 anchor_left = 0.5
